@@ -1,0 +1,49 @@
+<style type="text/css">
+    .email-details {
+        margin-top: 1rem;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: inline;
+
+            li {
+                display: inline;
+
+                &::after {
+                    content: ', ';
+                }
+
+                &:last-child::after {
+                    content: '';
+                }
+            }
+
+        }
+
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 8rem;
+
+            &::after {
+                content: ':';
+            }
+        }
+    }
+</style>
+
+<div class="email-details">
+    <div><span class="label">ID</span>{{.ID}}</div>
+    <div><span class="label">From</span>{{.Source}}</div>
+    <div><span class="label">To</span><ul>{{range .Destination.ToAddresses}}<li>{{.}}</li>{{end}}</ul></div>
+    <div><span class="label">Subject</span>{{.Subject}}</div>
+    <div><span class="label">Region</span>{{.Region}}</div>
+    <div><span class="label">Timestamp</span>{{.Timestamp}}</div>
+    {{if .Body.TextPart}}
+    <div><span class="label">TextPart</span>{{.Body.TextPart}}</div>
+    {{end}}
+    {{if .Body.HTMLPart}}
+    <div><span class="label">HTMLPart</span>{{.Body.HTMLPart}}</div>
+    {{end}}
+</div>
